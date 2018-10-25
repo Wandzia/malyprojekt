@@ -74,8 +74,11 @@ def click(przyciski, txt,lista, id):
   if all(x["state"] == DISABLED for x in przyciski):  # koniec gry 
 
     wygrana = Tk()
+    wygrana.config(bg='LightYellow')
+    label = Label( wygrana, text = "Brawo!", background="LightYellow", font = ("Times New Roman", 30),height=5,width=10 )
+    label.pack() 
 
-    button = Button(wygrana, text="BRAWO", background="yellow", command=lambda: close_window(wygrana))
+    button = Button(wygrana, text="Zakończ", background="LemonChiffon", font = ("Times New Roman", 20), command=lambda: close_window(wygrana))
 
     button.pack()
 
