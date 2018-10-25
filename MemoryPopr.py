@@ -11,7 +11,7 @@ master = Tk()
 button_switch = True
 
 
-
+# zamknięcie okien
 def close_window(wygrana):
 
   master.destroy()
@@ -26,16 +26,16 @@ przyciski_do_wyczyszczenia = []
 
 
 
-
+# funkcja przycisków
 def click(przyciski, txt,lista, id):
 
-  lista.append(id) 
+  lista.append(id) # lista kolejno klikniętych przycisków
 
   for i in range(1, len(przyciski)+1):
 
     if lista[len(lista)-2] == i:
 
-      poprzedni = przyciski[i-1] 
+      poprzedni = przyciski[i-1]  # zapamiętanie uprzednio klikniętego przycisku
 
 
 
@@ -43,17 +43,17 @@ def click(przyciski, txt,lista, id):
 
     if lista[len(lista)-1] == i:
 
-      aktualny = przyciski[i-1] 
+      aktualny = przyciski[i-1] # zapamiętanie aktualnie klikniętego przycisku
 
 
 
-  aktualny["text"] = txt 
+  aktualny["text"] = txt  # wyświetlenie tekstu
 
 
 
   if lista[len(lista)-2] != 0 and poprzedni["text"] != " " and poprzedni["state"] != DISABLED:
 
-      if aktualny["text"] == poprzedni["text"] and aktualny != poprzedni: 
+      if aktualny["text"] == poprzedni["text"] and aktualny != poprzedni: # odkrycie tych samych przycisków -> zamrożenie
 
           aktualny["state"] = DISABLED
 
@@ -63,7 +63,7 @@ def click(przyciski, txt,lista, id):
 
           poprzedni["background"] = "lightgray"
 
-      elif aktualny["text"] != poprzedni["text"]: 
+      elif aktualny["text"] != poprzedni["text"]:  # odkrycie dwóch różnych przycisków -> zakrycie
 
           przyciski_do_wyczyszczenia.append(aktualny)
 
@@ -71,7 +71,7 @@ def click(przyciski, txt,lista, id):
 
 
 
-  if all(x["state"] == DISABLED for x in przyciski):  
+  if all(x["state"] == DISABLED for x in przyciski):  # koniec gry 
 
     wygrana = Tk()
 
@@ -80,7 +80,7 @@ def click(przyciski, txt,lista, id):
     button.pack()
 
 
-
+# losowanie pozycji
 pozycja=[[0,0],[0,1],[0,2],[0,3],[1,0],[1,1],[1,2],[1,3],[2,0],[2,1],[2,2],[2,3],[3,0],[3,1],[3,2],[3,3]]
 
 pomocny= [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
@@ -92,7 +92,7 @@ pomocny = random.sample(pomocny, k=len(pomocny))
 przyciski=[]
 
 
-
+# stworzenie przycisków
 b1 = Button(master, text=" ", command=lambda: click(przyciski, "Goodbye", lista, 1), background="skyblue", width=11, height=5, state=NORMAL)
 
 b1.grid(row=pozycja[pomocny[0]][0], column=pozycja[pomocny[0]][1])
@@ -158,7 +158,7 @@ b16 = Button(master, text=" ", command=lambda: click(przyciski, "Good night", li
 b16.grid(row=pozycja[pomocny[15]][0], column=pozycja[pomocny[15]][1])
 
 
-
+# tablica przycisków
 przyciski.append(b1)
 
 przyciski.append(b2)
@@ -192,7 +192,7 @@ przyciski.append(b15)
 przyciski.append(b16)
 
 
-
+# poniższe trzy linijki zastępują "mainloop()", a po nich następuje kod dodatkowy
 while True:
 
 	master. update_idletasks ()
